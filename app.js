@@ -1,9 +1,16 @@
 require('dotenv').config();
-express('express-async-errors');
+require('express-async-errors');
 const express = require('express');
+const mongoose = require('mongoose')
 const errorHandler = require('./handler/errorHandler');
 
 const app = express();
+
+mongoose.connect(process.env.MONGO_URL,{}).then( () =>{
+  console.log("connection succesfuly");
+}).catch((err) =>{
+  console.log(err);
+} )
 
 app.use(express.json());
 
