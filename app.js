@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const errorHandler = require('./handler/errorHandler');
 const userRoutes = require('./module/user/user.routes');
+const transactionRoutes = require('./module/transaction/transaction.routes');
 
 const app = express();
 
@@ -19,6 +20,7 @@ require("./model/transactionModel")
 
 app.use(express.json());
 app.use("/api/user",userRoutes)
+app.use("/api/transaction",transactionRoutes)
 app.use(errorHandler);
 
 app.listen(3000, () => {
