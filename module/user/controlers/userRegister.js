@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
+
 const register = async (req, res)=>{
 
     const {name, email, password, balance, confrompassword} = req.body
