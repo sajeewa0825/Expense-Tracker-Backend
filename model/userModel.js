@@ -22,6 +22,8 @@ const userSchema= new mongoose.Schema({
         required:[true, "balance is required"],
         default:0
     }
+},{
+    timestamps:true
 })
 
 const userModel = mongoose.model("user",userSchema)

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const register = async (req, res)=>{
 
@@ -21,16 +22,22 @@ const register = async (req, res)=>{
     const hash = await bcrypt.hash(password, 10);
 
     //save data
-    await userModel.create({
+    const registerUser = await userModel.create({
         name:name,
         email:email,
         password:hash,
         balance:balance
     })
 
+    const accessToken = jwt.sign({
+        _id:registerUser._id,
+        name:registerUser.name,
+    }, process.env.JWT_SECRET);
+
     res.status(200).json({
         status:"succesfull",
-        massage:"user succesfull added"
+        massage:"user succesfull added",
+        accessToken:accessToken
     })
 }
 
