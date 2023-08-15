@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const jwtManager = require('../../../manager/jwtmanager');
 
 const login = async (req, res) => {
     const userModel = mongoose.model('user');
@@ -12,10 +12,7 @@ const login = async (req, res) => {
     const validPassword = await bcrypt.compare(password, user.password);
     if(!validPassword) throw "invalid email or password";
 
-    const accessToken = jwt.sign({
-        _id:user._id,
-        name:user.name,
-    }, process.env.JWT_SECRET);
+    const accessToken = jwtManager(user);
 
     res.status(200).json({
         status:"success",
