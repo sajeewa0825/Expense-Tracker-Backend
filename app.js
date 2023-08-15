@@ -13,7 +13,9 @@ mongoose.connect(process.env.MONGO_URL,{}).then( () =>{
   console.log(err);
 } )
 
+// models
 require("./model/userModel")
+require("./model/transactionModel")
 
 app.use(express.json());
 app.use("/api/user",userRoutes)
