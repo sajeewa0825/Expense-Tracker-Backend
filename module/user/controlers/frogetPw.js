@@ -41,6 +41,7 @@ const frogetPw = async (req, res) => {
 
   res.status(200).json({
     status: "succesfully",
+    message:"password reset code send"
   });
 };
 
