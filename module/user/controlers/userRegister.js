@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const jwtManager = require('../../../manager/jwtmanager');
+const nodemailer = require("nodemailer");
 
 
 const register = async (req, res)=>{
@@ -32,6 +33,22 @@ const register = async (req, res)=>{
     })
 
     const accessToken = jwtManager(registerUser);
+
+    var transport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: "97ca5b63974947",
+          pass: "84229e0fae4b7a"
+        }
+      });
+
+    await transport.sendMail({
+        to:email,
+        from:"info@expensive.com",
+        text:"welocme to the expenses track app",
+        subject:"welcome"
+    })
 
     res.status(200).json({
         status:"succesfull",
