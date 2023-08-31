@@ -6,7 +6,6 @@ const deleteTransaction = async (req, res) => {
     const transactionModel = mongoose.model("transaction")
     const userModel = mongoose.model("user");
     const { t_id } = req.params
-    console.log(t_id)
 
     const gettransaction = await transactionModel.findOne({
         _id: t_id
